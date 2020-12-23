@@ -6,5 +6,8 @@
         <div>
             <p>Hello World!!!</p>
         </div>
+        {% if request.session.user %}
+            <div>{{ email }}</div>
+        {% endif %}
     </body>
 </html>

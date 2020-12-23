@@ -1,12 +1,17 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import User
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 
 # Create your views here.
 
 
 def index(request):
-    # return HttpResponse("Hello World!!!!!!!!")
+    user_id = request.session.get('user')
+
+    if user_id:
+        user = User.objects.get(pk=user_id)
+        return render(request, 'index.html', {'email' : user.email})
+
     return render(request, 'index.html')
 
 
@@ -33,3 +38,22 @@ def register(request):
     else:
         form = RegisterForm()
         return render(request, "register.html", {'form': form})
+
+
+def login(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            request.session['user'] = form.user_id
+            return redirect('/')
+    else:
+        form = LoginForm()
+
+    return render(request, 'login.html', {'form': form})
+
+
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+
+    return redirect('/')
