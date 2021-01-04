@@ -10,9 +10,9 @@ def index(request):
 
     if user_id:
         user = User.objects.get(pk=user_id)
-        return render(request, 'index.html', {'email' : user.email})
+        return render(request, 'user/index.html', {'email' : user.email})
 
-    return render(request, 'index.html')
+    return render(request, 'user/index.html')
 
 
 def register(request):
@@ -33,11 +33,11 @@ def register(request):
         # 유효성 검사 실패시
         else:
             # render 함수를 통해 뷰와 템플릿을 연결하고 템플릿에 정보를 넘겨줄 수 있음
-            return render(request, "register.html", {'form': form})
+            return render(request, "user/register.html", {'form': form})
     # GET(사용자가 처음 들어와 아직 정보를 입력하기 전)
     else:
         form = RegisterForm()
-        return render(request, "register.html", {'form': form})
+        return render(request, "user/register.html", {'form': form})
 
 
 def login(request):
@@ -49,7 +49,7 @@ def login(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'user/login.html', {'form': form})
 
 
 def logout(request):
