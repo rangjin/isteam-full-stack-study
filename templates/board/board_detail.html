@@ -1,14 +1,13 @@
-<html>
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <div>
-            <label for="title">제목</label>
-            <input type="text" id="title" value="{{ board.title }}" readonly>
-            <label for="contents">내용</label>
-            <textarea readonly>{{ board.contents }}</textarea>
-        </div>
-        <button class="btn btn-primary" onclick="location.href='/board/list/'">돌아가기</button>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block contents %}
+<div>
+    <div>
+        <label for="title">제목</label>
+        <input type="text" id="title" value="{{ board.title }}" readonly>
+        <label for="contents">내용</label>
+        <textarea readonly>{{ board.contents }}</textarea>
+    </div>
+    <button onclick="location.href='/board/list/'">돌아가기</button>
+</div>
+{% endblock %}
