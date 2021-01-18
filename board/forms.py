@@ -17,3 +17,13 @@ class BoardForm(forms.Form):
         widget=forms.Textarea,
         label="내용",
     )
+
+
+class CommentForm(forms.Form):
+    contents = forms.CharField(
+        error_messages={
+            'required': '내용을 입력하세요.'
+        },
+        widget=forms.Textarea,
+        label="내용",
+    )

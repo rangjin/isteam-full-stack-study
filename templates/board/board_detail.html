@@ -10,4 +10,29 @@
     </div>
     <button onclick="location.href='/board/list/'">돌아가기</button>
 </div>
+<div>
+    <hr>
+    <div>
+        {% for comment in comments %}
+            <div>
+                <span>{{ comment.contents }}</span>
+                <span>||</span>
+                <span>{{ comment.writer.name }}</span>
+            </div>
+        {% endfor %}
+    </div>
+    <form method="POST" action="/board/detail/{{ board.id }}">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                <textarea name="{{ field.name }}" id="{{ field.id_for_label }}" placeholder="{{ field.label }}"></textarea>
+            </div>
+            {% if field.errors %}
+            <span style="color: red">{{ field.errors }}</span>
+            {% endif %}
+        {% endfor %}
+        <button type="submit">글쓰기</button>
+    </form>
+</div>
 {% endblock %}

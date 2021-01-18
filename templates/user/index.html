@@ -4,7 +4,12 @@
     <div>
         <p>Hello World!!!</p>
     </div>
+    <button onclick="location.href='/board/list'">게시글</button>
     {% if request.session.user %}
         <div>{{ email }}</div>
+        <button onclick="location.href='/user/logout'">로그아웃</button>
+    {% else %}
+        <button onclick="location.href='/user/login'">로그인</button>
+        <button onclick="location.href='/user/register'">회원가입</button>
     {% endif %}
 {% endblock %}
