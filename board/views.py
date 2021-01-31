@@ -19,8 +19,6 @@ def board_detail(request, pk):
     except Board.DoesNotExist:
         raise Http404('게시물을 찾을 수 없습니다.')
 
-    comments = Comment.objects.filter(board=board)
-
     if request.method == 'POST':
         if not request.session.get('user'):
             return redirect('/user/login')
@@ -40,6 +38,8 @@ def board_detail(request, pk):
             comment.save()
     else:
         form = CommentForm()
+
+    comments = Comment.objects.filter(board=board)
 
     return render(request, 'board/board_detail.html', {'board': board, 'comments': comments, 'form': form})
 
